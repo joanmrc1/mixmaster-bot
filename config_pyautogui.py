@@ -6,4 +6,4 @@ from helper import *
 load_dotenv()
 
 pyautogui.FAILSAFE = False
-#pyautogui.PAUSE = float(os.getenv('PAUSE_INTERVAL'))
+pyautogui.PAUSE = 0.2

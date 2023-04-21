@@ -28,12 +28,12 @@ JAULA_50 = [
 
 JAULA_70 = [
     [
-        './imagens/cores/jaula_70/MixMaster_1.jpg', 
+        './imagens/cores/jaula_70/MixMaster_1.jpg',
         './imagens/cores/jaula_70/MixMaster_2.jpg',
         './imagens/cores/jaula_70/MixMaster_3.jpg'
     ],
     [
-        './imagens/cores/jaula_70/MixMaster_4.jpg', 
+        './imagens/cores/jaula_70/MixMaster_4.jpg',
         './imagens/cores/jaula_70/MixMaster_5.jpg',
         './imagens/cores/jaula_70/MixMaster_6.jpg'
     ],
@@ -42,15 +42,15 @@ JAULA_70 = [
         './imagens/cores/jaula_70/MixMaster_8.jpg'
     ],
     [
-        './imagens/cores/jaula_70/MixMaster_9.jpg', 
+        './imagens/cores/jaula_70/MixMaster_9.jpg',
         './imagens/cores/jaula_70/MixMaster_10.jpg',
-        './imagens/cores/jaula_70/MixMaster_11.jpg', 
+        './imagens/cores/jaula_70/MixMaster_11.jpg',
         './imagens/cores/jaula_70/MixMaster_12.jpg'
     ],
     [
-        './imagens/cores/jaula_70/MixMaster_13.jpg', 
+        './imagens/cores/jaula_70/MixMaster_13.jpg',
         './imagens/cores/jaula_70/MixMaster_14.jpg',
-        './imagens/cores/jaula_70/MixMaster_15.jpg', 
+        './imagens/cores/jaula_70/MixMaster_15.jpg',
         './imagens/cores/jaula_70/MixMaster_16.jpg'
     ]
 ]
@@ -83,11 +83,17 @@ JAULA_125 = [
         './imagens/cores/jaula_125/MixMaster_12.jpg'
     ]
 ]
-#pyautogui.PAUSE = 0.11
-pyautogui.FAILSAFE = False
+
+MITCLAW = [
+    ['./imagens/cores/mitclaw/claw_1.png', './imagens/cores/mitclaw/claw_2.png',
+        './imagens/cores/mitclaw/claw_3.png', './imagens/cores/mitclaw/claw_4.png', 
+        './imagens/cores/phantom/phantom_1.png',
+        './imagens/cores/phantom/phantom_2.png',
+        './imagens/cores/phantom/phantom_3.png',
+        './imagens/cores/phantom/phantom_4.png']
+]
 
 date_execution_inital = datetime.now()
-
 
 def auto_attack_sequence():
     # eixo_x, eixo_y, status = [825, 253, 'DIREITA']
@@ -137,23 +143,23 @@ def auto_attack_sequence():
 
 
 def auto_attack_by_images(images):
-    date_execution_inital_local = datetime.now()
+    #date_execution_inital_local = datetime.now()
     while True:
-        if (datetime.now() - date_execution_inital_local).seconds > 9500:
-            use_mark()
-            print('Marca resetada!')
-            date_execution_inital_local = datetime.now()
+        # if (datetime.now() - date_execution_inital_local).seconds > 9500:
+        #     use_mark()
+        #     print('Marca resetada!')
+        #     date_execution_inital_local = datetime.now()
         for image in images:
             for i in image:
-                time.sleep(0.1)
-                locale = pyautogui.locateOnScreen(i, confidence=0.52)
+                locale = pyautogui.locateOnScreen(i, confidence=0.53)
+                print('image: ', locale)
                 if locale is not None:
                     position_mouse = pyautogui.center(locale)
                     if position_mouse.y < LIMIT_DOWN_VIEW:
                         print('SUCESSO -> ', i)
                         pyautogui.moveTo(position_mouse)
                         mouse_click()
-                        
+                        time.sleep(0.1)
 
 
 def auto_attack(images):  # [['path...']]
@@ -200,6 +206,7 @@ def get_position():
             print('\b' * len(positionStr), end='', flush=True)
     except KeyboardInterrupt:
         print('\n')
+        exit
 
 
 def execute_attack_by_thered():
@@ -229,4 +236,4 @@ def use_mark():
     except:
         press_keyboard('u')  # Fechar invetário
 
-auto_attack_by_images(JAULA_70)
+#auto_attack_by_images(JAULA_70)
