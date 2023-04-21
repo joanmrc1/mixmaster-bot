@@ -1,3 +1,4 @@
+from cgitb import reset
 import time
 import os
 import pyautogui
@@ -64,3 +65,13 @@ def mouse_right_click():
 def press_keyboard(key='p'):
     pyautogui.keyDown(key)
     pyautogui.keyUp(key)
+
+
+def image_in_screen(images = []):
+    resp = False
+    for image in images:
+        location_image = pyautogui.locateOnScreen(image)
+        if location_image is not None:
+            resp = True
+            break
+    return resp
